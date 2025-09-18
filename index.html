@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M365 Copilot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Header -->
+        <div class="top-header">
+            <div class="header-left">
+                <button class="header-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="app-title">
+                    <div class="copilot-logo">
+                        <div class="logo-squares">
+                            <div class="square red"></div>
+                            <div class="square yellow"></div>
+                            <div class="square green"></div>
+                            <div class="square blue"></div>
+                        </div>
+                    </div>
+                    <span>WindowsFlowAgent</span>
+                </div>
+            </div>
+            
+            <div class="header-tabs">
+                <button class="tab-btn" data-tab="work">Work</button>
+                <button class="tab-btn active" data-tab="web">Web</button>
+                <button class="tab-btn" data-tab="workflow">Windows workflow</button>
+            </div>
+            
+            <div class="header-right">
+                <button class="new-chat-btn" id="newChatBtn" title="New Chat">
+                    <i class="fas fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+                <button class="header-action-btn">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <button class="header-action-btn">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button class="header-action-btn">
+                    <i class="far fa-square"></i>
+                </button>
+                <button class="header-action-btn close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-layout">
+            <!-- Left Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-nav">
+                    <div class="nav-item active">
+                        <i class="fas fa-comments"></i>
+                        <span>Conversations</span>
+                        <i class="fas fa-chevron-down nav-arrow"></i>
+                    </div>
+                    
+                    <div class="conversations-list" id="conversationsList">
+                        <!-- Chat conversations will be added here dynamically -->
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle fill='%234285f4' cx='16' cy='16' r='16'/%3E%3Ctext x='16' y='21' font-family='Arial' font-size='14' fill='white' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E" alt="User">
+                        </div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="chat-area">
+                <div class="chat-content" id="chatContent">
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">Welcome. I am WindowsFlowAgent.</h1>
+                        <div class="welcome-description">
+                            <p>I can help you with automating tasks such as:</p>
+                            <ul class="capability-list">
+                                <li>Playing videos on Amazon Prime, YouTube, or Netflix.</li>
+                                <li>Opening Outlook and navigating buttons.</li>
+                                <li>Clicking icons and automating workflows.</li>
+                            </ul>
+                            <p class="welcome-cta">Just tell me what you'd like me to do!</p>
+                        </div>
+                        
+                        <div class="input-section">
+                            <div class="input-container">
+                                <input 
+                                    type="text" 
+                                    id="messageInput" 
+                                    placeholder="Message Copilot"
+                                    class="message-input"
+                                >
+                                <div class="input-actions">
+                                    <button class="input-action-btn" id="micBtn" title="Voice to text">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                    <button class="input-action-btn" id="audioBtn" title="Read response aloud">
+                                        <i class="fas fa-volume-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="close-modal" id="closeSettingsBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <label for="apiUrl">API Endpoint URL:</label>
+                    <input type="url" id="apiUrl" placeholder="https://api.example.com/chat" value="">
+                </div>
+                <div class="settings-section">
+                    <label for="apiKey">API Key (optional):</label>
+                    <input type="password" id="apiKey" placeholder="Enter your API key">
+                </div>
+                <div class="settings-section">
+                    <label for="maxTokens">Max Response Length:</label>
+                    <input type="number" id="maxTokens" value="1000" min="100" max="4000">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="resetSettingsBtn">Reset</button>
+                <button class="btn primary" id="saveSettingsBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
