@@ -234,20 +234,29 @@ class M365Copilot {
         utterance.rate = 0.9;  // Slightly slower than normal
         utterance.pitch = 1.0;
         utterance.volume = 0.8;
+        utterance.lang = 'en-US';
         
         // Try to use a more natural voice if available
         const voices = this.voices || window.speechSynthesis.getVoices();
-        const preferredVoice = voices.find(voice => 
-            voice.name.includes('Natural') || 
-            voice.name.includes('Enhanced') || 
+
+        // ADD THIS LINE - Filter for English voices only
+        const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
+        // MODIFY THIS LINE - Use English voices only
+        const preferredVoice = englishVoices.find(voice =>
+            voice.name.includes('Natural') ||
+            voice.name.includes('Enhanced') ||
             voice.name.includes('Premium') ||
             voice.name.includes('Neural') ||
             voice.name.includes('Google') ||
             (voice.localService === false && voice.lang.startsWith('en'))
         );
+        // Use first English voice if no preferred voice found
         if (preferredVoice) {
             utterance.voice = preferredVoice;
             console.log('Using voice:', preferredVoice.name);
+        } else if (englishVoices.length > 0) {
+            utterance.voice = englishVoices[0];  // ADD THIS - Use first English voice
+            console.log('Using first English voice:', englishVoices[0].name);
         }
         
         // Event listeners
