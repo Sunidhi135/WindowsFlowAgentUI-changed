@@ -21,6 +21,31 @@ class M365Copilot {
         this.bindWelcomeScreenInput();
         this.initSpeechRecognition();
         this.initTextToSpeech();
+
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Shift+M for microphone
+            if (e.ctrlKey && e.shiftKey && e.code === 'KeyM') {
+                e.preventDefault();
+                this.toggleMicrophone();
+            }
+
+            // Ctrl+Shift+A for text-to-speech (reads last assistant response)
+            if (e.ctrlKey && e.shiftKey && e.code === 'KeyA') {
+                e.preventDefault();
+                this.readLastAssistantResponse();
+            }
+        });
+    }
+
+    // Read last assistant response (for keyboard shortcut)
+    readLastAssistantResponse() {
+        const lastAssistantMessage = this.getLastAssistantMessage();
+        if (lastAssistantMessage) {
+            this.speakText(lastAssistantMessage);
+        } else {
+            // If no assistant message, speak a welcome message
+            this.speakText("Welcome to Hackathon");
+        }
     }
     
     // Load settings from localStorage
